@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <title>Title</title>
+
+    <script>
+        function testJavaScriptSyntaxError() {
+            t();
+        }
+
+        function testImgError() {
+            const img = document.createElement('IMG');
+            img.src = './test.png';
+            document.body.append(img);
+        }
+
+        function testPromiseError() {
+            new Promise((resolve, reject) => {
+                t();
+            });
+        }
+
+        function testCreateAWrongScriptError() {
+            const script = document.createElement('script');
+            script.innerHTML = `
+                var a = testCreateAWrongScriptErrorValiable;
+            `;
+            document.body.append(script);
+        }
+
+        function testCallApiError() {
+            axios.get('http://localhost:3000/test500');
+        }
+    </script>
+</head>
+<body>
+    <button onclick="testJavaScriptSyntaxError()">JavaScript语法异常</button>
+    <button onclick="testImgError()">加载图片资源异常</button>
+    <button onclick="testPromiseError()">未捕获的Promise错误</button>
+    <button onclick="testCallApiError()">api返回错误</button>
+    <button id="btn-cors-error">跨域异常</button>
+    <button onclick="testCreateAWrongScriptError()">动态创建的有错误的脚本</button>
+
+    <iframe src="./iframe.html" frameborder="0"></iframe>
+
+    <script src="http://localhost:3000/file.js" crossorigin></script>
+</body>
+</html>
