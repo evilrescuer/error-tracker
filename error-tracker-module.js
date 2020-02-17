@@ -104,14 +104,14 @@ class ErrorTracker {
         // XHR错误（利用http status code判断）
         hookAjax({
             onreadystatechange: xhr => {
-            if (xhr.readyState === 4) {
-                if (xhr.status >= 400 || xhr.status <= 599) {
-                    console.log('xhr错误：', xhr);
-                    const error = xhr.xhr;
-                    _instance.errorBox.push(new FEError(`api response ${error.status}`, error.responseURL, null, null, error.responseText));
+                if (xhr.readyState === 4) {
+                    if (xhr.status >= 400 || xhr.status <= 599) {
+                        console.log('xhr错误：', xhr);
+                        const error = xhr.xhr;
+                        _instance.errorBox.push(new FEError(`api response ${error.status}`, error.responseURL, null, null, error.responseText));
+                    }
                 }
             }
-        }
         }, destWindow);
 
         // 全局JS异常-window.onerror / 全局静态资源异常-window.addEventListener
@@ -137,18 +137,6 @@ class ErrorTracker {
             return true;
         });
 
-        // 网页奔溃异常-window.load和beforeunload （多个tab同时打开有问题）
-        // destWindow.addEventListener('load', _ => {
-        //     const closedStatus = localStorage.getItem('closed_status')
-        //     if (closedStatus && closedStatus !== 'closed') {
-        //         console.log('page closed exceptionally错误:', '页面异常关闭')
-        //     }
-        //     localStorage.setItem('closed_status', 'pending');
-        // });
-        // destWindow.addEventListener('beforeunload', event => {
-        //     localStorage.setItem('closed_status', 'closed');
-        // });
-
         // 页面嵌套错误（iframe错误等等、单点登录）（注意：不能捕获iframe加载时的错误）
         destWindow.addEventListener('load', () => {
             const iframes = destWindow.document.querySelectorAll('iframe');
@@ -170,5 +158,4 @@ class FEError {
     }
 }
 
-window.errorTracker = new ErrorTracker();
-window.errorTracker.init();
+export default ErrorTracker;

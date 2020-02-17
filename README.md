@@ -1,11 +1,24 @@
 # error-tracker
-A frontend error tracker.
+前端错误收集器
 
-### install dependency
-`yarn`
+安装 | [测试](./README_demo.md)
+#### 引入
 
-### pack project
-`yarn start`
+* npm包方式
 
-### open in your browser
-open dist/index.html
+* 文件引用方式
+```
+// html
+<body>
+...
+...
+...
+
+// body的最后引入
+<script src="https://github.com/evilrescuer/error-tracker/blob/master/error-tracker.js"></script>
+</body>
+```
+
+#### 获取当前收集到到错误
+`window.errorTracker.getErrors()`
+
