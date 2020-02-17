@@ -5,6 +5,8 @@
 #### 引入
 
 * npm包方式
+    * `yarn add web-error-tracker`
+    * 或者`npm install web-error-tracker`
 
 * 文件引用方式
 ```
